@@ -80,6 +80,34 @@ public class JavaProfMain {
         //выводим цвет, который нам задал пользователь. Если пользователь ничего не просил, то вывести набор из красных цветов.
         System.out.println("multiValueColors.getOrDefault(new MyKey(\"красный\"), List.of(ne) = " + multiValueColors.getOrDefault(new MyKey("red","красный"),List.of(new MyValue(245,0,0))));
         System.out.println("multiValueColors" + multiValueColors);
+
+        Map<String, String> immutStrings = Map.of("1", "one", "2", "two");
+        Map<String, String> immutStrings2 = Collections.unmodifiableMap(map);
+        //не сможем добавить
+        try {
+            immutStrings.put("3","three");
+        } catch (UnsupportedOperationException e) {
+            System.out.println("UOE");
+        }
+
+        try {
+            immutStrings2.put("3","three");
+        } catch (UnsupportedOperationException e) {
+            System.out.println("UOE2");
+        }
+        //делаем обратно изменяемыми. Это одна из реализаций
+        //new HashMap<>().putAll(immutStrings);
+        /**
+         * TreeMap - выводит данные упорядоченно
+         * Comparator.reverseOrder() выводит данные от большего к меньшему
+         */
+
+        TreeMap<Integer, String> ints = new TreeMap<>(Comparator.reverseOrder());
+        ints.put(10,"десять");
+        ints.put(3,"три");
+        ints.put(52,"пятьдесят два");
+        ints.put(27,"двадцать семь");
+        System.out.println("ints = " + ints);
     }
 
     /**
