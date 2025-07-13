@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class JavaProfMain {
     public static void main(String[] args) {
@@ -51,30 +48,59 @@ public class JavaProfMain {
         System.out.println("map = " + linkedHashMap.get("1"));
 
         HashMap<MyKey, MyValue> colors = new HashMap<>();
-        colors.put(new MyKey("black"),new MyValue(0,0,0));
-        colors.put(new MyKey("white"),new MyValue(255,255,255));
-        colors.put(new MyKey("red"),new MyValue(255,0,0));
+        MyKey white = new MyKey("white");
+        MyKey white2 = new MyKey("white");
+        System.out.println("white.hashCode() = " + white.hashCode());
+        System.out.println("white2.hashCode() = " + white2.hashCode());
+        colors.put(new MyKey("black"), new MyValue(0, 0, 0));
+        colors.put(white, new MyValue(255, 255, 255));
+        colors.put(new MyKey("red"), new MyValue(255, 0, 0));
         System.out.println("colors = " + colors);
-        System.out.println("colors " + colors.get("white"));
+        System.out.println("colors.get(\"white\") " + colors.get(white));
+        System.out.println("colors.get(new MyKey(\"red\")) " + colors.get(new MyKey("red")));
+        white.setColor("superwhite");
+        System.out.println("colors get white changed = " + colors.get(white));
 
     }
-/**
- * создаём класс, который будет хранить строчку
- */
-static class MyKey {
-    String color;
 
-    public MyKey(String color) {
-        this.color = color;
+    /**
+     * создаём класс, который будет хранить строчку
+     */
+    static class MyKey {
+        String color;
+
+        public MyKey(String color) {
+            this.color = color;
+        }
+
+        public void setColor(String color) {
+            this.color = color;
+        }
+
+        @Override
+        public String toString() {
+            return "MyKey{" +
+                    "color='" + color + '\'' +
+                    '}';
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) return true;
+            if (obj instanceof MyKey) {
+                MyKey other = (MyKey) obj;
+                return Objects.equals(color, other.color);
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hashCode(color);
+        }
     }
 
-    @Override
-    public String toString() {
-        return "MyKey{" +
-                "color='" + color + '\'' +
-                '}';
-    }
-}
     /**
      * соответствие каждому цвету некоторого набора  RGB
      */
@@ -99,3 +125,5 @@ static class MyKey {
         }
     }
 }
+
+
