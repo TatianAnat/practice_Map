@@ -76,6 +76,10 @@ public class JavaProfMain {
         multiValueColors.computeIfAbsent(white, k -> new ArrayList<>()).add(new MyValue(255,255,255));
         multiValueColors.computeIfAbsent(white2, k -> new ArrayList<>()).add(new MyValue(254,254,254));
         System.out.println("multiValueColors = " + multiValueColors);
+
+        //выводим цвет, который нам задал пользователь. Если пользователь ничего не просил, то вывести набор из красных цветов.
+        System.out.println("multiValueColors.getOrDefault(new MyKey(\"красный\"), List.of(ne) = " + multiValueColors.getOrDefault(new MyKey("red","красный"),List.of(new MyValue(245,0,0))));
+        System.out.println("multiValueColors" + multiValueColors);
     }
 
     /**
