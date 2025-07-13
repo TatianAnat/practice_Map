@@ -62,6 +62,29 @@ public class JavaProfMain {
         System.out.println("colors get white changed = " + colors.get(white));
         System.out.println("colors contains red = " + colors.containsKey(new MyKey("red", "красный2")));
 
+        System.out.println("colors " + colors);
+        //заменились значения у белого цвета
+        colors.put(white2, new MyValue(254,254,254));
+        System.out.println("colors " + colors);
+
+        /**
+         * чтоб сохранить оба значения белого цвета
+         * List<MyValue> - теперь будем сюда складывать свои цвета
+         * по ключу MyKey мы сможем достать и белый 255, и белый 254
+         */
+        HashMap<MyKey, List<MyValue>> multiValueColors = new HashMap<>();
+       multiValueColors.computeIfAbsent(white, k -> {
+                   System.out.println("не нашли k = " + k);
+                   return new ArrayList<>();
+        }).add(new MyValue(255,255,255));
+        if (!multiValueColors.containsKey(white2)) {
+            multiValueColors.put(white2, new ArrayList<>());
+        }
+        multiValueColors.get(white2).add(new MyValue(254,254,254));
+        System.out.println("multiValueColors = " + multiValueColors);
+
+
+
     }
 
     /**
