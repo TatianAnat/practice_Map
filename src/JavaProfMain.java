@@ -73,18 +73,9 @@ public class JavaProfMain {
          * по ключу MyKey мы сможем достать и белый 255, и белый 254
          */
         HashMap<MyKey, List<MyValue>> multiValueColors = new HashMap<>();
-       multiValueColors.computeIfAbsent(white, k -> {
-                   System.out.println("не нашли k = " + k);
-                   return new ArrayList<>();
-        }).add(new MyValue(255,255,255));
-        if (!multiValueColors.containsKey(white2)) {
-            multiValueColors.put(white2, new ArrayList<>());
-        }
-        multiValueColors.get(white2).add(new MyValue(254,254,254));
+        multiValueColors.computeIfAbsent(white, k -> new ArrayList<>()).add(new MyValue(255,255,255));
+        multiValueColors.computeIfAbsent(white2, k -> new ArrayList<>()).add(new MyValue(254,254,254));
         System.out.println("multiValueColors = " + multiValueColors);
-
-
-
     }
 
     /**
