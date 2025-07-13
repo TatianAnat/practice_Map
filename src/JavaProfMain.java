@@ -48,18 +48,19 @@ public class JavaProfMain {
         System.out.println("map = " + linkedHashMap.get("1"));
 
         HashMap<MyKey, MyValue> colors = new HashMap<>();
-        MyKey white = new MyKey("white");
-        MyKey white2 = new MyKey("white");
+        MyKey white = new MyKey("white", "белый");
+        MyKey white2 = new MyKey("white", "белый");
         System.out.println("white.hashCode() = " + white.hashCode());
         System.out.println("white2.hashCode() = " + white2.hashCode());
-        colors.put(new MyKey("black"), new MyValue(0, 0, 0));
+        colors.put(new MyKey("black","черный"), new MyValue(0, 0, 0));
         colors.put(white, new MyValue(255, 255, 255));
-        colors.put(new MyKey("red"), new MyValue(255, 0, 0));
+        colors.put(new MyKey("red", "красный"), new MyValue(255, 0, 0));
         System.out.println("colors = " + colors);
         System.out.println("colors.get(\"white\") " + colors.get(white));
-        System.out.println("colors.get(new MyKey(\"red\")) " + colors.get(new MyKey("red")));
-        white.setColor("superwhite");
+        System.out.println("colors.get(new MyKey(\"red\")) " + colors.get(new MyKey("red","красный")));
+        white.setColorRu("супербелый");
         System.out.println("colors get white changed = " + colors.get(white));
+        System.out.println("colors contains red = " + colors.containsKey(new MyKey("red", "красный2")));
 
     }
 
@@ -68,13 +69,15 @@ public class JavaProfMain {
      */
     static class MyKey {
         String color;
+        String colorRu;
 
-        public MyKey(String color) {
+        public MyKey(String color, String colorRu) {
             this.color = color;
+            this.colorRu = colorRu;
         }
 
-        public void setColor(String color) {
-            this.color = color;
+        public void setColorRu(String colorRu) {
+            this.colorRu = colorRu;
         }
 
         @Override
