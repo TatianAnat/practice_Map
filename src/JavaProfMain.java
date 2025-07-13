@@ -102,18 +102,33 @@ public class JavaProfMain {
          * Comparator.reverseOrder() выводит данные от большего к меньшему
          */
 
-        TreeMap<Integer, String> ints = new TreeMap<>(Comparator.reverseOrder());
+        TreeMap<Integer, String> ints = new TreeMap<>();
         ints.put(10,"десять");
         ints.put(3,"три");
         ints.put(52,"пятьдесят два");
         ints.put(27,"двадцать семь");
         System.out.println("ints = " + ints);
+        ints.put(49,"сорок девять");
+        System.out.println("ints = " + ints);
+        System.out.println("ints.ceilingEntry(40) = " + ints.ceilingEntry(40));
+        System.out.println("ints.floorEntry(40) = " + ints.floorEntry(40));
+        System.out.println("ints.higherEntry(49) = " + ints.higherEntry(49));
+        System.out.println("ints.lowerEntry(27) = " + ints.lowerEntry(27));
+        //выводим только ключ, меньше, чем 11
+        System.out.println("ints.lowerKey() = " + ints.lowerKey(11));
+
+
+        TreeMap<MyKey,MyValue> sortedColors = new TreeMap<>((c1,c2) -> c2.compareTo(c1));
+        sortedColors.put(new MyKey("black","черный"), new MyValue(0,0,0));
+        sortedColors.put(white, new MyValue(255,255,255));
+        sortedColors.put(new MyKey("red","красный"), new MyValue(255,0,0));
+        System.out.println("sortedColors = " + sortedColors);
     }
 
     /**
      * создаём класс, который будет хранить строчку
      */
-    static class MyKey {
+    static class MyKey implements Comparable<MyKey> {
         String color;
         String colorRu;
 
@@ -147,6 +162,11 @@ public class JavaProfMain {
         @Override
         public int hashCode() {
             return Objects.hashCode(color);
+        }
+
+        @Override
+        public int compareTo(MyKey o) {
+            return this.color.length() - o.color.length();
         }
     }
 
